@@ -6,7 +6,7 @@ import Libreria_numeros_complejos as nc
 
 
 def conv_float(lista):
-    """ convierte los elementos de una lista de numeros en tipo entero
+    """ convierte los elementos de una lista de numeros en tipo flotante
 
     :param lista: una lista de numeros en tipo str
     :type lista: list
@@ -33,13 +33,13 @@ def main():
     par_complejo2 = input("ingrese un numero complejo, de la forma a,b: ").split(",")
     par_complejo1 = conv_float(par_complejo1)
     par_complejo2 = conv_float(par_complejo2)
-    print(par_complejo1, par_complejo2)
+    print("usted ingreso los siguientes numeros complejos: ", par_complejo1, par_complejo2)
     print()
     print("elija la operacion que desee realizar con numeros complejos\n")
     operador = "0"
     while operador != "A":
         operador = input("Digite +,-,*,/ para realizar una operacion basica con numeros complejos, Digite A"
-                         "para finalizar las operaciones: ")
+                         " para finalizar las operaciones: ")
         if operador == "+":
             resultado = nc.suma_complejos(par_complejo1, par_complejo2)
             print("El resultado de la suma de los numeros complejos es: ", resultado, "\n")
@@ -48,6 +48,7 @@ def main():
             print("El resultado de la resta de los numeros complejos es: ", resultado, "\n")
         elif operador == "*":
             resultado = nc.multiplicacion_complejos(par_complejo1, par_complejo2)
+            resultado[0], resultado[1] = round(resultado[0], 2), round(resultado[1], 2)
             print("El resultado de la multiplicación de los numeros complejos es: ", resultado, "\n")
         elif operador == "/":
             resultado = nc.division_complejos(par_complejo1, par_complejo2)
