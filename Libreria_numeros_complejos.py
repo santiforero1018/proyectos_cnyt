@@ -1,4 +1,4 @@
-"""Libreria de operaciones basicas con numeros complejos definitiva
+"""Libreria de operaciones basicas con numeros complejos 
 
 """
 
