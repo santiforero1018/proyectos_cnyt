@@ -14,7 +14,7 @@ def potencia_polar(polar1, num):
     :return: potencia del numero complejo
     :rtype: list
     """
-    potencia_complejo = [polar1[0]**num, num * polar1[1]]
+    potencia_complejo = [round(polar1[0]**num, 2), round(num * polar1[1], 2)]
 
     return potencia_complejo
 
@@ -29,7 +29,7 @@ def division_polar(polar1, polar2):
         :return: division entre los numeros complejos en representación polar
         :rtype: list
         """
-    complejo_polar = [polar1[0] / polar2[0], polar1[1] - polar2[1]]
+    complejo_polar = [round(polar1[0] / polar2[0], 2), round(polar1[1] - polar2[1], 2)]
 
     return complejo_polar
 
@@ -44,7 +44,7 @@ def multiplicacion_polar(polar1, polar2):
     :return: producto entre los numeros complejos en representación polar
     :rtype: list
     """
-    complejo_polar = [polar1[0] * polar2[0], polar1[1] + polar2[1]]
+    complejo_polar = [round(polar1[0] * polar2[0], 2), round(polar1[1] + polar2[1], 2)]
 
     return complejo_polar
 
@@ -57,7 +57,7 @@ def rep_cartesiana(par):
     :return: representación cartesiana de un nnumero complejo
     :rtype: list
     """
-    complejo = [par[0] * math.cos(par[1]), par[0] * math.sin(par[1])]
+    complejo = [round(par[0] * math.cos(par[1]), 2), round(par[0] * math.sin(par[1]), 2)]
 
     return complejo
 
@@ -71,7 +71,7 @@ def rep_polar(par):
     :rtype: list
     """
     p = modulo_complejos(par)
-    ang = math.atan(par[1] / par[0])
+    ang = round(math.atan(par[1] / par[0]), 2)
     result = [p, ang]
 
     return result
@@ -101,7 +101,7 @@ def modulo_complejos(par):
     """
     modulo = (par[0] ** 2 + par[1] ** 2)
 
-    return math.sqrt(modulo)
+    return round(math.sqrt(modulo), 2)
 
 
 def division_complejos(par1, par2):
@@ -117,7 +117,7 @@ def division_complejos(par1, par2):
     d = (par2[0] ** 2 + par2[1] ** 2)
     x = (par1[0] * par2[0] + par1[1] * par2[1]) / d
     y = (par2[0] * par1[1] - par1[0] * par2[1]) / d
-    result = [x, y]
+    result = [round(x, 2), round(y, 2)]
 
     return result
 
@@ -162,6 +162,6 @@ def multiplicacion_complejos(par1, par2):
     :return: una lista como representación de el numero complejo resultante de la multiplicacion
     :rtype: list
     """
-    result = [(par1[0] * par2[0]) - (par1[1] * par2[1]), (par1[0] * par2[1]) + (par1[1] * par2[0])]
+    result = [round((par1[0] * par2[0]) - (par1[1] * par2[1]), 2), round((par1[0] * par2[1]) + (par1[1] * par2[0]), 2)]
 
     return result
