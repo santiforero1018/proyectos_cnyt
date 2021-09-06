@@ -2,10 +2,11 @@
 
 """
 
+import math
 import Libreria_numeros_complejos as nc
 import unittest
 
-
+raiz = math.sqrt(2)
 
 class Library_test(unittest.TestCase):
 
@@ -73,7 +74,33 @@ class Library_test(unittest.TestCase):
     def test_adjunta(self):
         self.assertEqual(nc.adjunta([[(4, 2), (5, 4.6), (2.3, 5.7)], [(4.3, 5.7), (2, 6.2), (4, 6.8)]]), [[(4, -2), (4.3, -5.7)], [(5, -4.6), (2, -6.2)], [(2.3, -5.7), (4, -6.8)]])
 
-    def test_
+    def test_multima(self):
+        self.assertTrue(nc.multiplicacion_matrices([[(4, 2), (5, 4.6), (2.3, 5.7)], [(4.3, 5.7), (2, 6.2), (4, 6.8)]], [[(2, -1), (4, 1), (9, 3)], [(8, -6), (7, 6), (4, -1)], [(9, 3), (8, -6), (4, 1)]]), [[(81.2, 65.0), (74.0, 106.0), (58.1, 68.5)], [(83.1, 117.9), (61.1, 112.9), (45.0, 118.2)]])
+        self.assertFalse(nc.multiplicacion_matrices([[(4, 2), (5, 4.6), (2.3, 5.7)], [(4.3, 5.7), (2, 6.2), (4, 6.8)]], [[(3, 7.1), (9, 10), (5, 3.5)], [(13, 15), (4, 16), (4, 12)]]))
+
+    def test_accionmv(self):
+        self.assertEqual(nc.accionmatriz_vector([[(2, -1), (4, 1)], [(8, -6), (7, 6)]], [(4.0, -1.8), (9.0, 3.0)]), [(78.0, 7.2), (195.0, 18.0)])
+
+    def test_productoint(self):
+        self.assertEqual(nc.int_product([(4.0, -1.8), (9.0, 3.0)], [(3.0, 7.8), (8.7, 5.2)]), (91.86, 57.3))
+
+    def test_norma(self):
+        self.assertEqual(nc.norma_vector([(2.3, 6), (7.4, 8), (3, 3.8), (4, 2.5)]), 192.13)
+
+    def test_distancia(self):
+        self.assertEqual(nc.distanciav([(3.0, 7.8), (8.7, 5.2)], [(4.0, -1.8), (9.0, 3.0)]), 98.08)
+
+    def test_unitaria(self):
+        self.assertTrue(nc.unitaria([[(0, 1/raiz), (0,-1/raiz)], [(0, 1/raiz), (0, 1/raiz)]]))
+        self.assertFalse(nc.unitaria([[(3, 7.1), (9, 10), (5, 3.5)], [(13, 15), (4, 16), (4, 12)]]))
+
+    def test_hermitiana(self):
+        self.assertTrue(nc.hermitiana([[(-1, 0), (0, -1)], [(0, 1), (1, 0)]]))
+        self.assertFalse(nc.hermitiana([[(3, 7.1), (9, 10), (5, 3.5)], [(13, 15), (4, 16), (4, 12)]]))
+
+    def test_tensorpv(self):
+        self.assertEqual(nc.tensor_productv([(3, 5), (4, 6.3), (7, 2.8)], [(-1, 4), (2, 7.2)]), [(-23, 7), (-30.0, 31.6), (-29.2, 9.7), (-37.36, 41.4), (-18.2, 25.2), (-6.16, 56.0)])
+
 
 if __name__ == '__main__':
     unittest.main()
