@@ -469,7 +469,7 @@ if __name__ == '__main__':
     #    print(inverse_vectorcx(v))
     #    print('multipliacion por un escalar')
     #    print(multi_escalar(complex_n, w))
-    # print(suma_matricesc(matrixc, matrixc1))
+    #print(suma_matricesc(matrixc, matrixc1))
     # print(accionmatriz_vector(matrixc2, vectorc))
     # print(multiplicacion_matrices(matrixc, matrixc3))
     # print(adjunta(matrixc))
