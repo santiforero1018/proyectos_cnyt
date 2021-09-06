@@ -197,7 +197,7 @@ def multiescalar_matrix(complexn, matrix):
     """
     for i in range(len(matrix)):
         for j in range(len(matrix[0])):
-            matrixc[i][j] = multiplicacion_complejos(complexn, matrix[i][j])
+            matrix[i][j] = multiplicacion_complejos(complexn, matrix[i][j])
 
     return matrix
 
@@ -470,6 +470,7 @@ if __name__ == '__main__':
     #    print('multipliacion por un escalar')
     #    print(multi_escalar(complex_n, w))
     #print(suma_matricesc(matrixc, matrixc1))
+    print(multiescalar_matrix((4, 7.8), [[(3, 7), (9, 10), (5, 3)], [(13, 15), (4, 16), (4, 12)]]))
     # print(accionmatriz_vector(matrixc2, vectorc))
     # print(multiplicacion_matrices(matrixc, matrixc3))
     # print(adjunta(matrixc))

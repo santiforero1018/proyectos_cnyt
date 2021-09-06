@@ -5,8 +5,7 @@
 import Libreria_numeros_complejos as nc
 import unittest
 
-matrixc = [[(4, 2), (5, 4.6), (2.3, 5.7)], [(4.3, 5.7), (2, 6.2), (4, 6.8)]]
-matrixc1 = [[(3, 7.1), (9, 10), (5, 3.5)], [(13, 15), (4, 16), (4, 12)]]
+
 
 class Library_test(unittest.TestCase):
 
@@ -51,14 +50,30 @@ class Library_test(unittest.TestCase):
         self.assertEqual(nc.inverse_vectorcx([(2, 3.5), (8.9, 5), (4, 9.2), (6, 2.3)]), [(-2, -3.5), (-8.9, -5), (-4, -9.2), (-6, -2.3)])
 
     def test_multescalarv(self):
-        self.assertEqual(nc.multi_escalar((4, 7.8) ,[(2, 3.5), (8.9, 5), (4, 9.2), (6, 2.3)]), [(-19.3, 29.6), (-3.4, 89.42), (-55.76, 68.0), (6.06, 56.0)])
-
-    def test_sumamatrices(self):
-        self.assertEqual(nc.suma_matricesc(matrixc, matrixc1), [[(-8.7, -9.3), (-2, -9.8), (0, -5.2)], [(-8.7, -9.3), (-2, -9.8), (0, -5.2)]])
+        self.assertEqual(nc.multi_escalar((4, 7.8), [(2, 3.5), (8.9, 5), (4, 9.2), (6, 2.3)]), [(-19.3, 29.6), (-3.4, 89.42), (-55.76, 68.0), (6.06, 56.0)])
 
     def test_negativam(self):
-        self.assertEqual(nc.inversa_add_matrizc(matrixc1),[[(-3, -7.1), (-9, -10), (-5, -3.5)], [(-13, -15), (-4, -16), (-4, -12)]])
+        self.assertEqual(nc.inversa_add_matrizc([[(3, 7), (9, 10), (5, 3)], [(13, 15), (4, 16), (4, 12)]]), [[(-3, -7), (-9, -10), (-5, -3)], [(-13, -15), (-4, -16), (-4, -12)]])
+
+    def test_sumamatrices(self):
+        self.assertEqual(nc.suma_matricesc([[(3, 7), (9, 10), (5, 3)], [(13, 15), (4, 16), (4, 12)]], [[(4, 2), (5, 4.6), (2.3, 5.7)], [(4.3, 5.7), (2, 6.2), (4, 6.8)]]), [[(17.3, 20.7), (6, 22.2), (8, 18.8)], [(17.3, 20.7), (6, 22.2), (8, 18.8)]])
+
+    def test_multiescalarm(self):
+        self.assertEqual(nc.multiescalar_matrix((4, 7.8), [[(3, 7), (9, 10), (5, 3)], [(13, 15), (4, 16), (4, 12)]]), [[(-42.6, 51.4), (-42.0, 110.2), (-3.4, 51.0)], [(-65.0, 161.4), (-108.8, 95.2), (-77.6, 79.2)]])
+
+    def test_transpuesta(self):
+        self.assertEqual(nc.transpuesta([[(4, 2), (5, 4.6), (2.3, 5.7)], [(4.3, 5.7), (2, 6.2), (4, 6.8)]]), [[(4, 2), (4.3, 5.7)], [(5, 4.6), (2, 6.2)], [(2.3, 5.7), (4, 6.8)]])
+
+    def test_conjugadov(self):
+        self.assertEqual(nc.conjugadov([(2, 3.5), (8.9, 5), (4, 9.2), (6, 2.3)]), [(2, -3.5), (8.9, -5), (4, -9.2), (6, -2.3)])
+
+    def test_conjugadom(self):
+        self.assertEqual(nc.conjugadom([[(2, -1), (4, 1), (9, 3)], [(8, -6), (7, 6), (4, -1)], [(9, 3), (8, -6), (4, 1)]]), [[(2, 1), (4, -1), (9, -3)], [(8, 6), (7, -6), (4, 1)], [(9, -3), (8, 6), (4, -1)]])
+
+    def test_adjunta(self):
+        self.assertEqual(nc.adjunta([[(4, 2), (5, 4.6), (2.3, 5.7)], [(4.3, 5.7), (2, 6.2), (4, 6.8)]]), [[(4, -2), (4.3, -5.7)], [(5, -4.6), (2, -6.2)], [(2.3, -5.7), (4, -6.8)]])
 
     def test_
+
 if __name__ == '__main__':
     unittest.main()
