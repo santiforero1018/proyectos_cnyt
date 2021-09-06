@@ -5,6 +5,216 @@
 import math
 
 
+def tensor_productv(vectorco1, vectorco2):
+    """ producto tensor entre los vectores
+
+    :param vectorco1: vecotr de valores complejos
+    :param vectorco2: vectotr de valores complejos
+    :return: producto tensor
+    """
+    lon_tensor = len(vectorco1) * len(vectorco2)
+    R = [(0, 0)] * lon_tensor
+    index = 0
+    for i in range(len(vectorco1)):
+        for j in range(len(vectorco2)):
+            R[index] = multiplicacion_complejos(vectorco1[i], vectorco2[j])
+            index += 1
+
+    return R
+
+
+def hermitiana(matriz):
+    """ determina si una matriz es hermitiana
+
+    :param matriz: una matriz de complejos
+    :return: un valor booleano
+    """
+    matrizh = adjunta(matriz)
+    if matrizh == matriz:
+        return True
+    else:
+        return False
+
+
+def unitaria(matriz):
+    """ revisa si una matriz es unitaria
+
+    :param matriz: matriz de complejos
+    :return: valor booleano
+    """
+    matrizt = adjunta(matriz)
+    identidad = [[(0, 0) for i in range(len(matriz[0]))] for j in range(len(matriz))]
+    for i in range(len(identidad)):
+        for j in range(len(identidad[0])):
+            if i == j:
+                identidad[i][j] = (1, 0)
+    if multiplicacion_matrices(matrizt, matriz) == identidad:
+        return True
+    else:
+        return False
+
+
+def distanciav(vectorc1, vectorc2):
+    if len(vectorc1) == len(vectorc2):
+        dif1 = []
+        for i in range(len(vectorc1)):
+            dif1.append(resta_complejos(vectorc1[i], vectorc2[i]))
+    productodif = int_product(dif1, dif1)
+    distancia = modulo_complejos(productodif)
+
+    return distancia
+
+
+def norma_vector(vectorc):
+    """ realiza la norma de un vector
+
+    :param vectorc: vector de complejos
+    :return: norma del vector
+    """
+    productoint = int_product(vectorc, vectorc)
+    norma = modulo_complejos(productoint)
+    return norma
+
+
+def int_product(vectorc1, vectorc2):
+    """producto interno entre dos vectores complejos
+
+    :param vectorc1: vector de numeros complejos
+    :param vectorc2: vector de numeros complejos
+    :return: porducto interno entre vecotres
+    """
+    if len(vectorc1) == len(vectorc2):
+        productoint = (0, 0)
+        vectorc1 = conjugadov(vectorc1)
+        for i in range(len(vectorc1)):
+            productoint = suma_complejos(productoint, multiplicacion_complejos(vectorc1[i], vectorc2[i]))
+
+        return productoint
+    else:
+        return False
+
+
+def accionmatriz_vector(matrix, vector):
+    """ accion de una matriz sobre un vector
+
+    :param matrix: matriz de complejos
+    :param vector: vector de complejos
+    :return: accion de la matriz sobre un vector
+    """
+    if len(matrix[0]) == len(vector):
+        accion = []
+        for i in range(len(matrix)):
+            accion.append((0, 0))
+        for i in range(len(matrix)):
+            for j in range(len(vector)):
+                for k in range(len(matrix[0])):
+                    accion[i] = suma_complejos(accion[i], multiplicacion_complejos(matrix[i][k], vector[j]))
+        return accion
+    else:
+        return False
+
+
+def multiplicacion_matrices(matrix1, matrix2):
+    """ multiplicacion entre matrices complejas
+
+    :param matrix1: matriz de compliejos
+    :param matrix2: matriz de complejos
+    :return: producto entre matrices
+    """
+    if len(matrix1[0]) == len(matrix2):
+        matrixr = []
+        for i in range(len(matrix1)):
+            matrixr.append([])
+            for j in range(len(matrix2[0])):
+                matrixr[i].append((0, 0))
+        for i in range(len(matrix1)):
+            for j in range(len(matrix2[0])):
+                for k in range(len(matrix1[0])):
+                    matrixr[i][j] = suma_complejos(matrixr[i][j],
+                                                   multiplicacion_complejos(matrix1[i][k], matrix2[k][j]))
+
+        return matrixr
+    else:
+        return False
+
+
+def adjunta(matriz):
+    """ adjunta de una matriz
+
+    :param matriz: matriz de complejos
+    :return: adjunta de la matriz
+    """
+    matrizad = conjugadom(transpuesta(matriz))
+
+    return matrizad
+
+
+def conjugadom(matriz):
+    """ conjugado de una matriz de complejos
+
+    :param matriz: matriz de complejos
+    :return: conjugado de la matriz
+    """
+    for i in range(len(matriz)):
+        for j in range(len(matriz[0])):
+            matriz[i][j] = conjugado_complejos(matriz[i][j])
+
+    return matriz
+
+
+def conjugadov(lista):
+    """ conjugado de un vector de complejos
+
+    :param lista: vector de complejos
+    :return: conjugado vector o matriz de complejos
+    """
+    for i in range(len(lista)):
+        lista[i] = conjugado_complejos(lista[i])
+    return lista
+
+
+def transpuesta(lista):
+    """ transpuesta de una matriz
+
+    :param lista: matriz de complejos
+    :return: transpuesta de la matriz
+    """
+    transp = []
+    for i in range(len(lista[0])):
+        transp.append([])
+        for j in range(len(lista)):
+            transp[i].append(lista[j][i])
+
+    return transp
+
+
+def multiescalar_matrix(complexn, matrix):
+    """multiplicacion escalar por una matriz
+
+    :param complexn: numero complejo
+    :param matrix: matriz de complejos
+    :return: multiplicacion escalar
+    """
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            matrixc[i][j] = multiplicacion_complejos(complexn, matrix[i][j])
+
+    return matrix
+
+
+def inversa_add_matrizc(matrizc):
+    """inversa aditiva de una matriz compleja
+
+    :param matrizc: matriz de numeros complejos
+    :return: inversa aditiva de la matriz
+    """
+    for i in range(len(matrizc)):
+        for j in range(len(matrizc[0])):
+            matrizc[i][j] = multiplicacion_complejos((-1, 0), matrizc[i][j])
+
+    return matrizc
+
+
 def suma_matricesc(matrizc1, matrizc2):
     """suma de dos matricves complejas
 
@@ -199,7 +409,7 @@ def resta_complejos(par1, par2):
     :return: una lista como representación de el numero complejo resultante de la resta
     :rtype: tuple
     """
-    result = (par1[0] - par2[0], par1[1] - par2[1])
+    result = (round(par1[0] - par2[0], 2), round(par1[1] - par2[1], 2))
 
     return result
 
@@ -214,7 +424,7 @@ def suma_complejos(par1, par2):
     :return: una lista como representación de el numero complejo resultante de la suma
     :rtype: tuple
     """
-    result = (par1[0] + par2[0], par1[1] + par2[1])
+    result = (round(par1[0] + par2[0], 2), round(par1[1] + par2[1], 2))
 
     return result
 
@@ -240,12 +450,34 @@ if __name__ == '__main__':
     complex_n = (4, -3.7)
     matrixc = [[(4, 2), (5, 4.6), (2.3, 5.7)], [(4.3, 5.7), (2, 6.2), (4, 6.8)]]
     matrixc1 = [[(3, 7.1), (9, 10), (5, 3.5)], [(13, 15), (4, 16), (4, 12)]]
-#    print(v)
-#    print(w)
-#    print('suma de los vectores')
-#    print(suma_vectorescpx(v, w))
-#    print('inverso del vector')
-#    print(inverse_vectorcx(v))
-#    print('multipliacion por un escalar')
-#    print(multi_escalar(complex_n, w))
-    print(suma_matricesc(matrixc, matrixc1))
+    matrixc3 = [[(2, -1), (4, 1), (9, 3)], [(8, -6), (7, 6), (4, -1)], [(9, 3), (8, -6), (4, 1)]]
+    matrixc2 = [[(2, -1), (4, 1)], [(8, -6), (7, 6)]]
+    raiz = math.sqrt(2)
+    matrixc4 = [[(0, 1/raiz), (0,-1/raiz)], [(0, 1/raiz), (0, 1/raiz)]]
+    matrixc5 = [[(-1, 0), (0, -1)], [(0, 1), (1, 0)]]
+    vectorc = [(4.0, -1.8), (9.0, 3.0)]
+    vectorc1 = [(3.0, 7.8), (8.7, 5.2)]
+    vectorc3 = [(3, 0), (4, 0), (7, 0)]
+    vectorc4 = [(-1, 0), (2, 0)]
+    matrixc6 = [[(1, 0), (2, 0)], [(3, 0), (4, 0)]]
+    vectorc5 = [(2, 0), (3, 0)]
+    #    print(v)
+    #    print(w)
+    #    print('suma de los vectores')
+    #    print(suma_vectorescpx(v, w))
+    #    print('inverso del vector')
+    #    print(inverse_vectorcx(v))
+    #    print('multipliacion por un escalar')
+    #    print(multi_escalar(complex_n, w))
+    # print(suma_matricesc(matrixc, matrixc1))
+    # print(accionmatriz_vector(matrixc2, vectorc))
+    # print(multiplicacion_matrices(matrixc, matrixc3))
+    # print(adjunta(matrixc))
+    # print(conjugadov(vectorc))
+    # print(int_product(vectorc, vectorc1))
+    # print(norma_vector(vectorc))
+    #print(distanciav(vectorc, vectorc1))
+    #print(unitaria(matrixc4))
+    #print(hermitiana(matrixc5))
+    #print(tensor_productv(vectorc3, vectorc4))
+    #print(tensor_productmv(matrixc6, vectorc5))
